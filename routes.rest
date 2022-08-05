@@ -1,6 +1,16 @@
-### GET BOOKS
+### GET BOOKS AS JSON
 
 GET http://localhost:3000/api/books HTTP/1.1
+content-type: application/json
+
+### GET BOOKS AS YAML
+
+GET http://localhost:3000/api/books?type=yaml HTTP/1.1
+content-type: text/yaml
+
+### GET BOOKS INVALID TYPE
+
+GET http://localhost:3000/api/books?type=qweqwe HTTP/1.1
 content-type: application/json
 
 ### ADD BOOK

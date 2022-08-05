@@ -6,6 +6,7 @@ struct Error
     end
 
     def out(env : HTTP::Server::Context)
+        env.response.content_type = "application/json"
         env.response.status_code = self.status
         self.to_json
     end

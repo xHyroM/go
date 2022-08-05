@@ -4,12 +4,23 @@ require "kemal"
 
 books = [] of Book
 
-before_get do |env|
-  env.response.content_type = "application/json"
+before_all do |env|
+  env.response.headers["X-Powered-By"] = "Kemal (Crystal)"
 end
 
-get "/api/books" do
-  books.to_json
+get "/api/books" do |env|
+  type = env.params.query["type"]? || "json"
+
+  case type
+  when "json"
+    env.response.content_type = "application/json"
+    books.to_json
+  when "yaml"
+    env.response.content_type = "text/plain" # Firefox doesnt support text/yaml :((
+    books.to_yaml
+  else
+    Error.new(400, "Invalid formatting type, supported: json, yaml").out(env)
+  end
 end
 
 post "/api/books" do |env|
@@ -26,6 +37,8 @@ post "/api/books" do |env|
   if books.includes?(book)
     Error.new(400, "Book already exist.").out(env)
   else
+    env.response.content_type = "application/json"
+
     books.push(book)
     book.to_json
   end
