@@ -34,14 +34,22 @@ post "/api/books" do |env|
   end
 
   book = Book.new(name.as(String), description.as(String), author.as(String), price.as(Float64))
-  if books.includes?(book)
-    Error.new(400, "Book already exist.").out(env)
-  else
-    env.response.content_type = "application/json"
+  exist = false
+  books.each { |book|
+    if book.name === name
+      exist = true
+      break
+    end
+  }
 
-    books.push(book)
-    book.to_json
+  if exist
+    next Error.new(400, "Book already exist.").out(env)
   end
+
+  env.response.content_type = "application/json"
+
+  books.push(book)
+  book.to_json
 end
 
 Kemal.run 
