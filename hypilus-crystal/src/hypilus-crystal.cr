@@ -1,4 +1,5 @@
 require "./struct/book.cr"
+require "./struct/error.cr"
 require "kemal"
 
 books = [] of Book
@@ -18,13 +19,12 @@ post "/api/books" do |env|
   price = env.params.json["price"]?
 
   if name.nil? || description.nil? || author.nil? || price.nil?
-    next {"error": "Bad Request", "message": "Missing body"}.to_json
+    next Error.new(400, "Missing body.").out(env)
   end
 
   book = Book.new(name.as(String), description.as(String), author.as(String), price.as(Float64))
   if books.includes?(book)
-    env.response.status_code = 400
-    {"error": "Bad Request", "message": "Book already exist."}.to_json
+    Error.new(400, "Book already exist.").out(env)
   else
     books.push(book)
     book.to_json
