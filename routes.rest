@@ -1,14 +1,26 @@
-GET http://localhost:3000/api/list HTTP/1.1
+### GET BOOKS
+
+GET http://localhost:3000/api/books HTTP/1.1
 content-type: application/json
 
-###
+### ADD BOOK
 
-POST http://localhost:3000/api/book HTTP/1.1
+POST http://localhost:3000/api/books HTTP/1.1
 content-type: application/json
 
 {
     "name": "asd",
     "description": "lol",
     "author": "ad",
+    "price": 10.25
+}
+
+### SEND BROKEN POST REQUEST
+
+POST http://localhost:3000/api/books HTTP/1.1
+content-type: application/json
+
+{
+    "name": "asd",
     "price": 10.25
 }
