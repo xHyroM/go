@@ -1,8 +1,13 @@
 require "./routes/ProjectsHandler.cr"
 require "./middleware/main.cr"
 require "./struct/Error.cr"
+require "dotenv"
 require "mysql"
 require "kemal"
+
+if File.exists?("../../.env")
+  Dotenv.load("../../.env")
+end
 
 module Hypilus
   Database = DB.open "mysql://#{ENV["MYSQL_USER"]}:#{ENV["MYSQL_PASSWORD"]}@#{ENV["MYSQL_IP"]}/hypilus"
