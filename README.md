@@ -1,4 +1,4 @@
-# hypilus-crystal
+# hypilus
 
 Hypilus is API for simple things, built with crystal
 

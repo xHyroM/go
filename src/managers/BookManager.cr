@@ -1,4 +1,4 @@
-require "../hypilus-crystal.cr"
+require "../hypilus.cr"
 
 struct BookManager
     def self.get_book_name(name : String)

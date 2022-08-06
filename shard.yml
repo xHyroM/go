@@ -1,12 +1,12 @@
-name: hypilus-crystal
+name: hypilus
 version: 0.1.0
 
 authors:
   - xHyroM <generalkubo@gmail.com>
 
 targets:
-  hypilus-crystal:
-    main: src/hypilus-crystal.cr
+  hypilus:
+    main: src/hypilus.cr
 
 dependencies:
   kemal:
