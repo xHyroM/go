@@ -1,4 +1,5 @@
 require "./routes/BooksHandler.cr"
+require "./middleware/main.cr"
 require "./struct/Error.cr"
 require "./struct/Book.cr"
 require "sqlite3"
@@ -9,6 +10,7 @@ module Hypilus
   Database.exec "create table if not exists books (name text, description text, author text, price float)"
 end
 
+add_handler MainMiddleware::Handler.new
 add_handler BooksHandler.new
 
 error 404 do |env|
