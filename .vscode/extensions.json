@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "EditorConfig.EditorConfig"
+        "EditorConfig.EditorConfig",
+        "crystal-lang-tools.crystal-lang"
     ]
 }
