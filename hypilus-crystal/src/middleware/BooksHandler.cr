@@ -1,4 +1,4 @@
-require "../hypilus-crystal.cr"
+require "../managers/BookManager.cr"
 require "../struct/error.cr"
 require "../struct/book.cr"
 require "kemal"
@@ -28,14 +28,12 @@ class BooksHandler < Kemal::Handler
         case type
         when "json"
             env.response.content_type = "application/json"
-            queried = Hypilus::Database.query_all "SELECT * FROM books", as: Book.tuple
 
-            queried.to_json
+            BookManager.get_books
         when "yaml"
             env.response.content_type = "text/plain" # Firefox doesnt support text/yaml :((
-            queried = Hypilus::Database.query_all "SELECT * FROM books", as: Book.tuple
 
-            queried.to_yaml
+            BookManager.get_books
         else
             Error.new(400, "Invalid formatting type, supported: json, yaml").out(env)
         end
@@ -52,7 +50,7 @@ class BooksHandler < Kemal::Handler
         end
 
         book = Book.new(name.as(String), description.as(String), author.as(String), price.as(Float64))
-        exist = Hypilus::Database.query_one? "SELECT name FROM books WHERE name = ?", book.name, as: String
+        exist = BookManager.get_book_name(book.name)
         
         if exist
             return Error.new(400, "Book already exist.").out(env)
@@ -60,7 +58,7 @@ class BooksHandler < Kemal::Handler
         
         env.response.content_type = "application/json"
         
-        Hypilus::Database.exec "INSERT INTO books (name, description, author, price) VALUES (?, ?, ?, ?)", book.name, book.description, book.author, book.price
+        BookManager.add_book(book)
         book.to_json
     end
 end
