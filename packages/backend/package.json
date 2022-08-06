@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "shards build",
+    "dev": "shards run"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
