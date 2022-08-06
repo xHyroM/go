@@ -1,11 +1,11 @@
-require "../managers/BookManager.cr"
+require "../managers/ProjectManager.cr"
+require "../struct/Project.cr"
 require "../struct/Error.cr"
-require "../struct/Book.cr"
 require "kemal"
 
-class BooksHandler < Kemal::Handler
+class ProjectsHandler < Kemal::Handler
   def call(env : HTTP::Server::Context)
-    unless env.request.path === "/api/books"
+    unless env.request.path === "/api/projects"
       return call_next(env)
     end
 
@@ -28,11 +28,11 @@ class BooksHandler < Kemal::Handler
     when "json"
       env.response.content_type = "application/json"
 
-      BookManager.get_books
+      ProjectManager.get_projects
     when "yaml"
       env.response.content_type = "text/plain" # Firefox doesnt support text/yaml :((
 
-      BookManager.get_books
+      ProjectManager.get_projects
     else
       Error.new(400, "Invalid formatting type, supported: json, yaml").out(env)
     end
@@ -42,22 +42,22 @@ class BooksHandler < Kemal::Handler
     name = env.params.json["name"]?
     description = env.params.json["description"]?
     author = env.params.json["author"]?
-    price = env.params.json["price"]?
+    github_repository_url = env.params.json["github_repository_url"]?
 
-    if name.nil? || description.nil? || author.nil? || price.nil?
-      return Error.new(400, "Missing body, required name, description, author, price").out(env)
+    if name.nil? || description.nil? || author.nil? || github_repository_url.nil?
+      return Error.new(400, "Missing body, required name, description, author, github_repository_url").out(env)
     end
 
-    book = Book.new(name.as(String), description.as(String), author.as(String), price.as(Float64))
-    exist = BookManager.get_book_name(book.name)
+    project = Project.new(name.as(String), description.as(String), author.as(String), github_repository_url.as(String))
+    exist = ProjectManager.get_project_name(project.name)
 
     if exist
-      return Error.new(400, "Book already exists").out(env)
+      return Error.new(400, "Project already exists").out(env)
     end
 
     env.response.content_type = "application/json"
 
-    BookManager.add_book(book)
-    book.to_json
+    ProjectManager.add_project(project)
+    project.to_json
   end
 end

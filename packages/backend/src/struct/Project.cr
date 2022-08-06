@@ -1,13 +1,13 @@
 require "yaml"
 
-struct Book
+struct Project
   property name : String
   property description : String
   property author : String
-  property price : Float64
-  class_property tuple = {name: String, description: String, author: String, price: Float64}
+  property github_repository_url : String
+  class_property tuple = {name: String, description: String, author: String, github_repository_url: String}
 
-  def initialize(@name : String, @description : String, @author : String, @price : Float64)
+  def initialize(@name : String, @description : String, @author : String, @github_repository_url : String)
   end
 
   def to_json(json : JSON::Builder)
@@ -15,7 +15,7 @@ struct Book
       json.field "name", self.name
       json.field "description", self.description
       json.field "author", self.author
-      json.field "price", self.price
+      json.field "github_repository_url", self.github_repository_url
     end
   end
 
@@ -30,8 +30,8 @@ struct Book
       yaml.scalar "author"
       yaml.scalar self.author
 
-      yaml.scalar "price"
-      yaml.scalar self.price
+      yaml.scalar "github_repository_url"
+      yaml.scalar self.github_repository_url
     end
   end
 end

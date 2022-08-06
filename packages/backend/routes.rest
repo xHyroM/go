@@ -1,36 +1,36 @@
-### GET BOOKS AS JSON
+### GET PROJECTS AS JSON
 
-GET http://localhost:3000/api/books HTTP/1.1
+GET http://localhost:3000/api/projects HTTP/1.1
 content-type: application/json
 
-### GET BOOKS AS YAML
+### GET PROJECTS AS YAML
 
-GET http://localhost:3000/api/books?type=yaml HTTP/1.1
+GET http://localhost:3000/api/projects?type=yaml HTTP/1.1
 content-type: text/yaml
 
-### GET BOOKS INVALID TYPE
+### GET PROJECTS INVALID TYPE
 
-GET http://localhost:3000/api/books?type=qweqwe HTTP/1.1
+GET http://localhost:3000/api/projects?type=qweqwe HTTP/1.1
 content-type: application/json
 
-### ADD BOOK
+### ADD PROJECT
 
-POST http://localhost:3000/api/books HTTP/1.1
+POST http://localhost:3000/api/projects HTTP/1.1
 content-type: application/json
 
 {
-    "name": "asd",
-    "description": "lol",
-    "author": "ad",
-    "price": 10.25
+    "name": "hypilus",
+    "description": "Simple API in crystal",
+    "author": "xHyroM",
+    "github_repository_url": "https://github.com/xHyroM/hypilus"
 }
 
 ### SEND BROKEN POST REQUEST
 
-POST http://localhost:3000/api/books HTTP/1.1
+POST http://localhost:3000/api/projects HTTP/1.1
 content-type: application/json
 
 {
     "name": "asd",
-    "price": 10.25
+    "author": "xHyroM"
 }

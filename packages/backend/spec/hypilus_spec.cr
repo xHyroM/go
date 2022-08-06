@@ -1,13 +1,13 @@
 require "./spec_helper.cr"
 
 describe "hypilus http server" do
-  it "GET /api/books" do
-    get "/api/books"
+  it "GET /api/projects" do
+    get "/api/projects"
     response.body.should be_truthy
   end
 
-  it "POST /api/books" do
-    post "/api/books", HTTP::Headers{"Content-Type" => "application/json"}, {"name": "test", "description": "test", "author": "ad", "price": 30.05}.to_json
-    response.body.should eq "{\"name\":\"test\",\"description\":\"test\",\"author\":\"ad\",\"price\":30.05}"
+  it "POST /api/projects" do
+    post "/api/projects", HTTP::Headers{"Content-Type" => "application/json"}, {"name": "hypilus", "description": "Simple API in crystal", "author": "xHyroM", "github_repository_url": "https://github.com/xHyroM/hypilus"}.to_json
+    response.body.should eq "{\"name\":\"hypilus\",\"description\":\"Simple API in crystal\",\"author\":\"xHyroM\",\"github_repository_url\":\"https://github.com/xHyroM/hypilus\"}"
   end
 end
