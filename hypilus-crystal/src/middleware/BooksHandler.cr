@@ -7,7 +7,7 @@ class BooksHandler < Kemal::Handler
     def call(env : HTTP::Server::Context)
         puts env.request.path
         unless env.request.path === "/api/books"
-            return
+            return call_next(env)
         end
 
         env.response.headers["X-Powered-By"] = "Kemal (Crystal)"
@@ -18,7 +18,7 @@ class BooksHandler < Kemal::Handler
         when "POST"
             env.response.print handle_post(env)
         else
-            call_next(env)
+            Error.new(405, "Allowed methods: GET, POST")
         end
     end
 

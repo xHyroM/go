@@ -1,7 +1,8 @@
 require "./middleware/BooksHandler.cr"
+require "./struct/Error.cr"
 require "./struct/Book.cr"
-require "kemal"
 require "sqlite3"
+require "kemal"
 
 module Hypilus
   Database = DB.open "sqlite3://./storage/data.db"
@@ -9,5 +10,13 @@ module Hypilus
 end
 
 add_handler BooksHandler.new
+
+error 404 do |env|
+  Error.new(404).out(env)
+end
+
+error 500 do |env|
+  Error.new(500).out(env)
+end
 
 Kemal.run 
