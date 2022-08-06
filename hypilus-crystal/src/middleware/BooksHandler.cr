@@ -7,6 +7,12 @@ class BooksHandler < Kemal::Handler
     only ["/api/books"]
 
     def call(env : HTTP::Server::Context)
+        unless only_match?(env)
+            return
+        end
+        
+        env.response.headers["X-Powered-By"] = "Kemal (Crystal)"
+
         case env.request.method
         when "GET"
             env.response.print handle_get(env)
