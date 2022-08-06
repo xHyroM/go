@@ -1,6 +1,6 @@
 require "../managers/BookManager.cr"
-require "../struct/error.cr"
-require "../struct/book.cr"
+require "../struct/Error.cr"
+require "../struct/Book.cr"
 require "kemal"
 
 class BooksHandler < Kemal::Handler

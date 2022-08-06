@@ -1,5 +1,5 @@
 require "./middleware/BooksHandler.cr"
-require "./struct/book.cr"
+require "./struct/Book.cr"
 require "kemal"
 require "sqlite3"
 
