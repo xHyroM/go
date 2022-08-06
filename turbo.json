@@ -11,6 +11,9 @@
     "test": {
       "outputs": []
     },
+    "run": {
+      "outputs": []
+    },
     "dev": {
       "cache": false
     }
