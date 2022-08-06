@@ -8,4 +8,8 @@ dependencies:
   hypilus-backend:
     path: ./packages/backend
 
+development_dependencies:
+  hypilus-backend:
+    path: ./packages/backend
+
 license: MIT

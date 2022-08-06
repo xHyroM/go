@@ -2,6 +2,16 @@
 
 Hypilus is an API for simple things, built with crystal
 
+## Development
+
+Requirements:
+- [Crystal](https://crystal-lang.org)
+- [Bun](https://bun.sh)
+- [NodeJS](https://nodejs.org)
+
+After forking repository, run `make init` for create `.env` file & install dependencies
+Fill `.env` file, run `make dev` 🎉
+
 ## Contributing
 
 1. Fork it (<https://github.com/xHyroM/hypilus/fork>)
