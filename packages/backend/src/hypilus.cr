@@ -21,4 +21,4 @@ error 500 do |env|
   Error.new(500).out(env)
 end
 
-Kemal.run 
+Kemal.run

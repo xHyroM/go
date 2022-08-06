@@ -5,7 +5,8 @@
   "scripts": {
     "build": "shards build",
     "dev": "shards run",
-    "install": "shards install"
+    "install": "shards install",
+    "lint": "crystal tool format"
   },
   "license": "MIT",
   "dependencies": {},
