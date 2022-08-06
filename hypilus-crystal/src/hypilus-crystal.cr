@@ -1,4 +1,4 @@
-require "./middleware/BooksHandler.cr"
+require "./routes/BooksHandler.cr"
 require "./struct/Error.cr"
 require "./struct/Book.cr"
 require "sqlite3"
