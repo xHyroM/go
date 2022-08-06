@@ -1,4 +1,4 @@
-name: hypilus-backend
+name: hypilus
 version: 0.1.0
 
 authors:
@@ -13,6 +13,10 @@ dependencies:
     github: kemalcr/kemal
   sqlite3:
     github: crystal-lang/crystal-sqlite3
+
+development_dependencies:
+  spec-kemal:
+    github: kemalcr/spec-kemal
 
 crystal: 1.5.0
 

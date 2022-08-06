@@ -6,6 +6,7 @@
     "build": "shards build",
     "dev": "shards run",
     "install": "shards install",
+    "test": "KEMAL_ENV=test crystal spec",
     "lint": "crystal tool format"
   },
   "license": "MIT",
