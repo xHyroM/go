@@ -5,7 +5,6 @@ require "kemal"
 
 class BooksHandler < Kemal::Handler
     def call(env : HTTP::Server::Context)
-        puts env.request.path
         unless env.request.path === "/api/books"
             return call_next(env)
         end
