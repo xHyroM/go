@@ -45,14 +45,14 @@ class BooksHandler < Kemal::Handler
         price = env.params.json["price"]?
         
         if name.nil? || description.nil? || author.nil? || price.nil?
-            return Error.new(400, "Missing body.").out(env)
+            return Error.new(400, "Missing body, required name, description, author, price").out(env)
         end
 
         book = Book.new(name.as(String), description.as(String), author.as(String), price.as(Float64))
         exist = BookManager.get_book_name(book.name)
         
         if exist
-            return Error.new(400, "Book already exist.").out(env)
+            return Error.new(400, "Book already exists").out(env)
         end
         
         env.response.content_type = "application/json"
