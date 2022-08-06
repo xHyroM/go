@@ -31,3 +31,9 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+# Crystal
+/lib/
+/.shards/
+*.dwarf
+/shard.lock

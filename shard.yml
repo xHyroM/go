@@ -1,0 +1,11 @@
+name: hypilus-monorepo
+version: 0.0.0
+
+authors:
+  - xHyroM <generalkubo@gmail.com>
+
+dependencies:
+  hypilus-backend:
+    path: ./packages/backend
+
+license: MIT
