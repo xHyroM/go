@@ -1,9 +1,11 @@
 require "./middleware/BooksHandler.cr"
 require "./struct/book.cr"
 require "kemal"
+require "sqlite3"
 
 module Hypilus
-  Books = [] of Book
+  Database = DB.open "sqlite3://./storage/data.db"
+  Database.exec "create table if not exists books (name text, description text, author text, price float)"
 end
 
 add_handler BooksHandler.new

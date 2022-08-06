@@ -4,13 +4,12 @@ require "../struct/book.cr"
 require "kemal"
 
 class BooksHandler < Kemal::Handler
-    only ["/api/books"]
-
     def call(env : HTTP::Server::Context)
-        unless only_match?(env)
+        puts env.request.path
+        unless env.request.path === "/api/books"
             return
         end
-        
+
         env.response.headers["X-Powered-By"] = "Kemal (Crystal)"
 
         case env.request.method
@@ -28,13 +27,17 @@ class BooksHandler < Kemal::Handler
 
         case type
         when "json"
-          env.response.content_type = "application/json"
-          Hypilus::Books.to_json
+            env.response.content_type = "application/json"
+            queried = Hypilus::Database.query_all "SELECT * FROM books", as: Book.tuple
+
+            queried.to_json
         when "yaml"
-          env.response.content_type = "text/plain" # Firefox doesnt support text/yaml :((
-          Hypilus::Books.to_yaml
+            env.response.content_type = "text/plain" # Firefox doesnt support text/yaml :((
+            queried = Hypilus::Database.query_all "SELECT * FROM books", as: Book.tuple
+
+            queried.to_yaml
         else
-          Error.new(400, "Invalid formatting type, supported: json, yaml").out(env)
+            Error.new(400, "Invalid formatting type, supported: json, yaml").out(env)
         end
     end
 
@@ -47,15 +50,9 @@ class BooksHandler < Kemal::Handler
         if name.nil? || description.nil? || author.nil? || price.nil?
             return Error.new(400, "Missing body.").out(env)
         end
-        
+
         book = Book.new(name.as(String), description.as(String), author.as(String), price.as(Float64))
-        exist = false
-        Hypilus::Books.each { |book|
-            if book.name === name
-            exist = true
-            break
-            end
-        }
+        exist = Hypilus::Database.query_one? "SELECT name FROM books WHERE name = ?", book.name, as: String
         
         if exist
             return Error.new(400, "Book already exist.").out(env)
@@ -63,7 +60,7 @@ class BooksHandler < Kemal::Handler
         
         env.response.content_type = "application/json"
         
-        Hypilus::Books.push(book)
+        Hypilus::Database.exec "INSERT INTO books (name, description, author, price) VALUES (?, ?, ?, ?)", book.name, book.description, book.author, book.price
         book.to_json
     end
 end
