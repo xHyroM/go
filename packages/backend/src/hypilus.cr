@@ -1,6 +1,8 @@
 require "./routes/ProjectsHandler.cr"
+require "./routes/OAuth2Handler.cr"
 require "./middleware/main.cr"
 require "./struct/Error.cr"
+require "multi_auth"
 require "dotenv"
 require "mysql"
 require "kemal"
