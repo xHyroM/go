@@ -11,8 +11,8 @@ targets:
 dependencies:
   kemal:
     github: kemalcr/kemal
-  mysql:
-    github: crystal-lang/crystal-mysql
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
   dotenv:
     github: drum445/dotenv
   multi_auth:

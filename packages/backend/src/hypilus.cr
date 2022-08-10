@@ -4,7 +4,7 @@ require "./middleware/main.cr"
 require "./struct/Error.cr"
 require "multi_auth"
 require "dotenv"
-require "mysql"
+require "sqlite3"
 require "kemal"
 
 if File.exists?("../../.env")
@@ -12,7 +12,8 @@ if File.exists?("../../.env")
 end
 
 module Hypilus
-  Database = DB.open "mysql://#{ENV["MYSQL_USER"]}:#{ENV["MYSQL_PASSWORD"]}@#{ENV["MYSQL_IP"]}/hypilus"
+  Database = DB.open "sqlite3://.storage/data.db"
+  #Database = DB.open "mysql://#{ENV["MYSQL_USER"]}:#{ENV["MYSQL_PASSWORD"]}@#{ENV["MYSQL_IP"]}/hypilus"
   Database.exec "create table if not exists projects (name text, description text, author text, github_repository_url text)"
 end
 

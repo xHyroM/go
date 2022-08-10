@@ -8,6 +8,11 @@ content-type: application/json
 GET http://localhost:3000/api/projects?type=yaml HTTP/1.1
 content-type: text/yaml
 
+### GET PROJECTS AS XML
+
+GET http://localhost:3000/api/projects?type=xml HTTP/1.1
+content-type: text/xml
+
 ### GET PROJECTS INVALID TYPE
 
 GET http://localhost:3000/api/projects?type=qweqwe HTTP/1.1

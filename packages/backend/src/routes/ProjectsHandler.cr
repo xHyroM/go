@@ -28,13 +28,17 @@ class ProjectsHandler < Kemal::Handler
     when "json"
       env.response.content_type = "application/json"
 
-      ProjectManager.get_projects
+      ProjectManager.get_projects type
     when "yaml"
       env.response.content_type = "text/plain" # Firefox doesnt support text/yaml :((
 
-      ProjectManager.get_projects
+      ProjectManager.get_projects type
+    when "xml"
+      env.response.content_type = "text/xml"
+
+      ProjectManager.get_projects type
     else
-      Error.new(400, "Invalid formatting type, supported: json, yaml").out(env)
+      Error.new(400, "Invalid formatting type, supported: json, yaml, xml").out(env)
     end
   end
 

@@ -24,10 +24,6 @@ shards:
     git: https://github.com/msa7/multi_auth.git
     version: 1.1.1
 
-  mysql:
-    git: https://github.com/crystal-lang/crystal-mysql.git
-    version: 0.14.0
-
   radix:
     git: https://github.com/luislavena/radix.git
     version: 0.4.1
@@ -35,4 +31,8 @@ shards:
   spec-kemal:
     git: https://github.com/kemalcr/spec-kemal.git
     version: 1.0.0
+
+  sqlite3:
+    git: https://github.com/crystal-lang/crystal-sqlite3.git
+    version: 0.19.0
 

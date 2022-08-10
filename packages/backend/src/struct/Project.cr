@@ -1,4 +1,5 @@
 require "yaml"
+require "xml"
 
 struct Project
   property name : String
@@ -33,5 +34,12 @@ struct Project
       yaml.scalar "github_repository_url"
       yaml.scalar self.github_repository_url
     end
+  end
+
+  def to_xml(xml : XML::Builder)
+    xml.element("name") { xml.text self.name }
+    xml.element("description") { xml.description self.description }
+    xml.element("author") { xml.author self.author }
+    xml.element("github_repository_url") { xml.github_repository_url self.github_repository_url }
   end
 end
